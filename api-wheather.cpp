@@ -13,7 +13,7 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
 }
 
 int main() {
-    string api_key = "API_KEY";  
+    string api_key = "API_KEY";
     // city
     string city;
     cout<<"Entrer le nom de la ville:  ";
@@ -48,7 +48,8 @@ int main() {
                 cout << "Température: " << jsonData["main"]["temp"].asFloat() << "°C" << endl;
                 cout << "Description: " << jsonData["weather"][0]["description"].asString() << endl;
                 cout << "Humidité: " << jsonData["main"]["humidity"].asFloat() <<" %"<< endl;
-                cout << "Vent: " << jsonData["wind"]["speed"].asFloat() <<"km/h"<<endl;
+                cout << "Vent: " << jsonData["wind"]["speed"].asFloat() <<"km/h"<<endl; 
+                cout << "Pression atmosphérique: " << jsonData["main"]["pressure"].asFloat() <<" hectopascals"<<endl; 
                 cout<<""<<endl;
             } else {
                 cout << "Erreur : " << errs << endl;
