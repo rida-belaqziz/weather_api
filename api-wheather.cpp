@@ -26,6 +26,7 @@ int main() {
     string readBuffer;
 
     curl = curl_easy_init(); // initialise la session curl
+   
     if (curl) {
         //Configurer curl avec curl_easy_setopt
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str()); //définit l’URL à laquelle curl va envoyer la requête
@@ -58,6 +59,37 @@ int main() {
             cerr << "Erreur : " << curl_easy_strerror(res) << endl;
         }
     }
+
+
+    std::string url2 = "https://postman-echo.com/post"; //pour tester POST
+    // Deuxième requête POST
+    CURL* curl2 = curl_easy_init(); //// nouvelle session curl2
+    std::string postBuffer;
+    if (curl2) {
+        std::string postData = "{\"TestVar\": \"0001\"}";
+
+        curl_easy_setopt(curl2, CURLOPT_URL, url2.c_str());
+        curl_easy_setopt(curl2, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_easy_setopt(curl2, CURLOPT_POSTFIELDS, postData.c_str());
+        curl_easy_setopt(curl2, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl2, CURLOPT_WRITEDATA, &postBuffer);
+
+        res = curl_easy_perform(curl2);
+
+        if (res == CURLE_OK) {
+            std::cout << "Réponse POST : " << postBuffer << std::endl;
+        } else {
+            std::cerr << "Erreur POST : " << curl_easy_strerror(res) << std::endl;
+        }
+
+        curl_easy_cleanup(curl2);
+    } else {
+        std::cerr << "Erreur d'initialisation de cURL" << std::endl;
+    }
+
+
+
+
 
     return 0;
 }
