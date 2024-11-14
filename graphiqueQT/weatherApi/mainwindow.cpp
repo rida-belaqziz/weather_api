@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     networkManager = new QNetworkAccessManager(this);
 
     // Initialiser les villes dans le combo box
-    std::vector<QString> villes = {"Paris", "Lille", "Poitiers", "New York", "Tokyo", "Berlin", "Moscou"};
+    std::vector<QString> villes = {"Paris", "Lille", "Poitiers", "New York", "Tokyo", "Berlin", "Moscou", "Pékin", "Orlando", "Shanghai", "Las Vegas", "Mexico", "Londres", "Guangzhou"};
     for(const auto &city : villes){ui->comboBox_ville->addItem(city);}
 
     // Connecter le bouton à l'action de récupération météo
