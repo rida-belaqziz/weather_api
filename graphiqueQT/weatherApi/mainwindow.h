@@ -15,10 +15,12 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    //void updateWeatherIcon(const QString);
 
 private slots:
     void onFetchWeatherClicked();                  // Slot pour gérer le clic du bouton
     void onWeatherDataReceived(QNetworkReply *);   // Slot pour traiter les données reçues
+    //void updateWeatherIcon(const QString);
 
 private:
     Ui::MainWindow *ui;

@@ -6,6 +6,8 @@
 #include <QNetworkRequest>
 #include <vector>
 #include <QString>
+#include <QDebug>
+#include <QDir>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connecter le gestionnaire réseau pour traiter les données de l'API
     connect(networkManager, &QNetworkAccessManager::finished, this, &MainWindow::onWeatherDataReceived);
+
+
 }
 
 MainWindow::~MainWindow() {
@@ -57,6 +61,36 @@ void MainWindow::onWeatherDataReceived(QNetworkReply *reply) {
         ui->lcdNumber_temp->display(temp);
         ui->lcdNumber_hum->display(humidity);
         ui->lcdNumber_vent->display(windSpeed);
+        // Afficher image en fonction temp/humididty...
+        QString weatherCode;
+        if (temp >= 20 && temp <= 30 && humidity >= 20 && humidity <= 50) {
+                    weatherCode = "soleil";
+      } else if (temp >= 5 && temp <= 25 && humidity >= 70 && humidity <= 100) {
+                    weatherCode = "pluie";
+      } else if (temp >= 10 && temp <= 20 && humidity >= 50 && humidity <= 80) {
+                    weatherCode = "nuageux";
+      } else {
+                    weatherCode = "default"; // Image par défaut si aucune condition ne correspond
+      }
+        qDebug() << "Verifier : weatherCode " << weatherCode;
+
+                // Charger et afficher l'image
+                // /Users/ridabelaqziz/Desktop/Revision2025/OpenWeather PROJECT/graphiqueQT/weatherApi
+
+                QString imagePath = "Chemin de l'image";
+                //qDebug() << "Chemin de l'image : " << imagePath;
+                QPixmap pixmap(imagePath);
+                //<qDebug() << "Emplacement image " << imagePath;
+
+
+                if (!pixmap.isNull()) {
+                    ui->label_image->setPixmap(pixmap);
+                } else {
+                    qDebug() << "Erreur : image introuvable pour le code météo " << weatherCode;
+                    //qDebug() << "Erreur : image introuvable l'mplacelement " << imagePath;
+                }
+
+
     } else {
         // erreur si la requête a échoué
         ui->lcdNumber_temp->display(0);
@@ -65,10 +99,6 @@ void MainWindow::onWeatherDataReceived(QNetworkReply *reply) {
     }
     reply->deleteLater();
 }
-
-
-
-
 
 
 

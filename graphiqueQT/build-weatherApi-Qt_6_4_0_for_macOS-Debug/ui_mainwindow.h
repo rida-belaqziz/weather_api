@@ -37,6 +37,7 @@ public:
     QLabel *label_temp;
     QLabel *label_vent;
     QLabel *label_hum;
+    QLabel *label_image;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -49,7 +50,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         label_titre = new QLabel(centralwidget);
         label_titre->setObjectName("label_titre");
-        label_titre->setGeometry(QRect(330, 0, 201, 41));
+        label_titre->setGeometry(QRect(330, 0, 157, 16));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -60,6 +61,7 @@ public:
         font.setItalic(false);
         font.setUnderline(true);
         label_titre->setFont(font);
+        label_titre->setTextFormat(Qt::AutoText);
         label_ville = new QLabel(centralwidget);
         label_ville->setObjectName("label_ville");
         label_ville->setGeometry(QRect(70, 140, 171, 16));
@@ -90,6 +92,10 @@ public:
         label_hum = new QLabel(centralwidget);
         label_hum->setObjectName("label_hum");
         label_hum->setGeometry(QRect(120, 380, 91, 16));
+        label_image = new QLabel(centralwidget);
+        label_image->setObjectName("label_image");
+        label_image->setGeometry(QRect(560, 270, 100, 100));
+        label_image->setScaledContents(true);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -114,6 +120,7 @@ public:
         label_temp->setText(QCoreApplication::translate("MainWindow", "Temperature: ", nullptr));
         label_vent->setText(QCoreApplication::translate("MainWindow", "Vent :", nullptr));
         label_hum->setText(QCoreApplication::translate("MainWindow", "Humidit\303\251:", nullptr));
+        label_image->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 
 };
